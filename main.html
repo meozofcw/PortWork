@@ -1,215 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfólio | Designer & Dev Full-Stack</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio | Designer & Dev Full-Stack</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Tipografia moderna */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
-  <style>
-    /* Fonte personalizada */
-    @font-face {
-      font-family: 'Zarma';
-      src: url('https://example.com/zarma-regular.woff2') format('woff2');
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9f9f9;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
 
-    body {
-      font-family: 'Zarma', monospace;
-      background: radial-gradient(circle at center, #0a0a0a, #000);
-      color: #e0e0e0;
-      overflow-x: hidden;
-    }
+  h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
 
-    /* Cursor customizado */
-    body, a, button {
-      cursor: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMTIiLz48L3N2Zz4='), auto;
-    }
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 1.5rem; }
 
-    /* Glitch */
-    .glitch {
-      position: relative;
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-    }
-    .glitch::before { color: #0ff; animation: glitch 2s infinite; }
-    .glitch::after  { color: #f0f; animation: glitch 3s infinite reverse; }
+  a {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
 
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-      100% { transform: translate(0); }
-    }
+  a:hover { color: #1e40af; }
 
-    /* Botão neon */
-    .neon-btn {
-      border: 1px solid #0ff;
-      position: relative;
-      transition: 0.3s;
-    }
-    .neon-btn::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,255,255,0.1);
-      opacity: 0;
-      transition: 0.3s;
-    }
-    .neon-btn:hover {
-      box-shadow: 0 0 15px #0ff;
-    }
-    .neon-btn:hover::after {
-      opacity: 1;
-    }
+  /* Botões minimalistas */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #2563eb;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
 
-    /* Cards com efeito tilt */
-    .tilt:hover {
-      transform: perspective(800px) rotateY(5deg) rotateX(5deg);
-    }
-    .tilt {
-      transition: transform 0.3s ease;
-    }
+  .btn:hover {
+    background-color: #2563eb;
+    color: #fff;
+  }
 
-    /* Scroll animation */
-    .hidden-section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
-    }
-    .visible-section {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  /* Cards */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Skills bar */
+  .skill-bar {
+    height: 0.5rem;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background-color: #2563eb;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  /* Section spacing */
+  section { padding: 6rem 2rem; }
+
+  /* Fade-in on scroll */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body>
 
-  <!-- Menu -->
-  <nav class="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex justify-between items-center bg-black/70 backdrop-blur-sm border-b border-cyan-300/20">
-    <div class="text-xl font-bold tracking-wider">{"</>"}</div>
-    <div class="hidden md:flex space-x-8">
-      <a href="#work" class="hover:text-cyan-300">PROJETOS</a>
-      <a href="#skills" class="hover:text-cyan-300">HABILIDADES</a>
-      <a href="#about" class="hover:text-cyan-300">SOBRE</a>
-      <a href="#contact" class="hover:text-cyan-300">CONTATO</a>
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="font-bold text-xl">Portfólio</div>
+    <div class="space-x-6 hidden md:flex">
+      <a href="#work">Projetos</a>
+      <a href="#skills">Habilidades</a>
+      <a href="#about">Sobre</a>
+      <a href="#contact">Contato</a>
     </div>
-    <button class="md:hidden text-xl">≡</button>
-  </nav>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <section class="min-h-screen flex items-center px-8 pt-24 text-center md:text-left">
-    <div class="max-w-4xl mx-auto">
-      <span class="text-green-400">// PORTFÓLIO_INICIALIZANDO...</span>
-      <h1 class="text-5xl md:text-7xl font-bold my-6">
-        <span class="glitch" data-text="DESIGNER_DEV">DESIGNER_DEV</span>
-      </h1>
-      <p id="type-text" class="text-cyan-300 text-2xl font-mono mb-8"></p>
-      <div class="flex flex-wrap justify-center md:justify-start gap-4">
-        <a href="#work" class="neon-btn px-6 py-3">VER_PROJETOS</a>
-        <a href="#contact" class="neon-btn px-6 py-3">CONTATO_IMEDIATO</a>
+<!-- Hero -->
+<section class="flex flex-col items-center justify-center text-center mt-20">
+  <h1 class="mb-4">DESIGNER & DEV FULL-STACK</h1>
+  <p class="text-lg mb-6 max-w-xl">Criação de interfaces e sistemas com foco em clareza tipográfica, funcionalidade e estética moderna.</p>
+  <div class="space-x-4">
+    <a href="#work" class="btn">Ver Projetos</a>
+    <a href="#contact" class="btn">Contato</a>
+  </div>
+</section>
+
+<!-- Work -->
+<section id="work" class="max-w-6xl mx-auto fade-in">
+  <h2 class="mb-12 text-center">Projetos Recentes</h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="card">
+      <h3>Sistema de Design</h3>
+      <p class="text-gray-600 mb-2">Diretrizes tipográficas e componentes UI.</p>
+      <div class="flex gap-2 flex-wrap text-sm">
+        <span class="bg-gray-100 px-2 py-1 rounded">Illustrator</span>
+        <span class="bg-gray-100 px-2 py-1 rounded">HTML/CSS</span>
+        <span class="bg-gray-100 px-2 py-1 rounded">JS</span>
       </div>
     </div>
-  </section>
-
-  <!-- Work -->
-  <section id="work" class="py-24 px-8 hidden-section">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12"><span class="text-outline">PROJETOS_</span><span class="text-cyan-300">RECENTES</span></h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="tilt border border-gray-800 p-6 bg-black hover:border-cyan-300">
-          <h3 class="text-2xl font-bold mb-2">SISTEMA_DE_DESIGN</h3>
-          <p class="text-gray-400">DIRETRIZES TIPOGRÁFICAS E COMPONENTES UI</p>
-        </div>
-        <div class="tilt border border-gray-800 p-6 bg-black hover:border-cyan-300">
-          <h3 class="text-2xl font-bold mb-2">DASHBOARD_ANALYTICS</h3>
-          <p class="text-gray-400">VISUALIZAÇÃO DE DADOS INTERATIVA</p>
-        </div>
+    <div class="card">
+      <h3>Dashboard Analytics</h3>
+      <p class="text-gray-600 mb-2">Visualização de dados interativa.</p>
+      <div class="flex gap-2 flex-wrap text-sm">
+        <span class="bg-gray-100 px-2 py-1 rounded">Power BI</span>
+        <span class="bg-gray-100 px-2 py-1 rounded">Node.js</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Skills -->
-  <section id="skills" class="py-24 px-8 bg-gray-900 hidden-section">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold mb-12"><span class="text-outline">HABILIDADES_</span><span class="text-cyan-300">TÉCNICAS</span></h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <p class="text-green-400 mb-4">$ TECNOLOGIAS</p>
-          <div class="space-y-4">
-            <div><span>NODE.JS</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:85%"></div></div></div>
-            <div><span>JAVASCRIPT</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:90%"></div></div></div>
-          </div>
-        </div>
-        <div>
-          <p class="text-green-400 mb-4">$ DESIGN</p>
-          <div class="space-y-4">
-            <div><span>ILLUSTRATOR</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:80%"></div></div></div>
-          </div>
-        </div>
+<!-- Skills -->
+<section id="skills" class="max-w-6xl mx-auto fade-in">
+  <h2 class="mb-12 text-center">Habilidades Técnicas</h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    <div>
+      <h3 class="mb-2">Tecnologias</h3>
+      <div class="mb-4">
+        <div class="mb-1">Node.js</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+      </div>
+      <div class="mb-4">
+        <div class="mb-1">JavaScript</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
       </div>
     </div>
-  </section>
-
-  <!-- Sobre -->
-  <section id="about" class="py-24 px-8 hidden-section">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6"><span class="text-outline">SOBRE_</span><span class="text-cyan-300">MIM</span></h2>
-      <p class="text-gray-300 max-w-2xl mx-auto">Designer e desenvolvedor full-stack focado em criar experiências digitais imersivas...</p>
+    <div>
+      <h3 class="mb-2">Design</h3>
+      <div class="mb-4">
+        <div class="mb-1">Illustrator</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="mb-4">
+        <div class="mb-1">Power BI</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contato -->
-  <section id="contact" class="py-24 px-8 bg-black hidden-section">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-6"><span class="text-outline">CONTATO_</span><span class="text-cyan-300">DIRETO</span></h2>
-      <form class="space-y-4 max-w-lg mx-auto">
-        <input type="text" placeholder="Nome" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"/>
-        <input type="email" placeholder="Email" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"/>
-        <textarea rows="4" placeholder="Mensagem" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"></textarea>
-        <button type="submit" class="neon-btn px-8 py-3">ENVIAR</button>
-      </form>
-    </div>
-  </section>
+<!-- About -->
+<section id="about" class="max-w-4xl mx-auto fade-in">
+  <h2 class="mb-12 text-center">Sobre Mim</h2>
+  <p class="text-center text-gray-700 mb-4">Designer e desenvolvedor full-stack focado em criar experiências digitais coerentes e funcionais. Combino princípios de design clássico com tecnologias modernas para soluções completas.</p>
+  <p class="text-center text-gray-700">Minha abordagem valoriza clareza tipográfica, funcionalidade e estética, criando interfaces que comunicam eficientemente.</p>
+</section>
 
-  <!-- Footer -->
-  <footer class="py-6 px-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-    © 2025 DESIGNER_DEV. Criado com HTML, CSS e JS.
-  </footer>
+<!-- Contact -->
+<section id="contact" class="max-w-4xl mx-auto fade-in">
+  <h2 class="mb-12 text-center">Contato</h2>
+  <form class="grid gap-6">
+    <input type="text" placeholder="Nome" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"/>
+    <input type="email" placeholder="Email" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"/>
+    <textarea rows="4" placeholder="Mensagem" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"></textarea>
+    <button type="submit" class="btn w-full">Enviar Mensagem</button>
+  </form>
+</section>
 
-  <script>
-    // Efeito de digitação
-    const phrases = ["DESIGNER_DE_INTERFACES", "DESENVOLVEDOR_FULL-STACK", "ESPECIALISTA_EM_TIPOGRAFIA"];
-    let i = 0, j = 0, currentPhrase = [], isDeleting = false;
-    const el = document.getElementById("type-text");
+<!-- Footer -->
+<footer class="py-6 mt-12 text-center text-gray-500 text-sm">
+  © 2025 DESIGNER_DEV. Criado com HTML, CSS e JS.
+</footer>
 
-    function loop() {
-      el.textContent = currentPhrase.join("");
-      if (i < phrases.length) {
-        if (!isDeleting && j <= phrases[i].length) currentPhrase.push(phrases[i][j++]);
-        if (isDeleting && j > 0) currentPhrase.pop(j--);
-        if (j === phrases[i].length) isDeleting = true;
-        if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % phrases.length; }
-      }
-      setTimeout(loop, isDeleting ? 50 : 100);
-    }
-    loop();
-
-    // Scroll animation
-    const sections = document.querySelectorAll(".hidden-section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible-section");
-      });
-    }, { threshold: 0.2 });
-    sections.forEach(sec => observer.observe(sec));
-  </script>
+<script>
+  // Fade-in sections
+  const fadeElems = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  fadeElems.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
