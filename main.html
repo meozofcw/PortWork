@@ -6,99 +6,91 @@
 <title>Portfólio | Designer & Dev Full-Stack</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* Tipografia moderna */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+  /* Tipografia */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;700&display=swap');
 
   body {
     font-family: 'Inter', sans-serif;
-    background-color: #f9f9f9;
-    color: #1a1a1a;
+    background-color: #0f0f0f;
+    color: #e0e0e0;
     line-height: 1.6;
   }
 
-  h1, h2, h3 {
-    font-weight: 800;
-    letter-spacing: -0.5px;
+  h1,h2,h3 {
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
   }
 
-  h1 { font-size: 3rem; }
+  h1 { font-size: 3rem; letter-spacing: -1px; }
   h2 { font-size: 2.25rem; }
   h3 { font-size: 1.5rem; }
 
   a {
-    color: #2563eb;
+    color: #00ffff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
   }
 
-  a:hover { color: #1e40af; }
+  a:hover { color: #ff00ff; }
 
-  /* Botões minimalistas */
+  /* Navbar */
+  nav { background-color: #111; border-bottom: 1px solid #222; }
+
+  nav a { font-weight: 600; letter-spacing: 0.5px; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 8rem 2rem 4rem; }
+  .typewriter { font-family: 'Fira Code', monospace; font-size: 1.5rem; color: #00ffff; }
+
+  /* Buttons */
   .btn {
     padding: 0.75rem 1.5rem;
-    border: 2px solid #2563eb;
+    border: 2px solid #00ffff;
     border-radius: 6px;
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
   }
-
   .btn:hover {
-    background-color: #2563eb;
-    color: #fff;
+    background-color: #00ffff;
+    color: #0f0f0f;
   }
 
   /* Cards */
   .card {
-    background-color: #fff;
+    background-color: #1a1a1a;
+    border: 1px solid #222;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     padding: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease;
   }
+  .card:hover { transform: translateY(-4px); border-color: #00ffff; }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  }
-
-  /* Skills bar */
-  .skill-bar {
-    height: 0.5rem;
-    background-color: #e5e7eb;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
+  /* Skills */
+  .skill-bar { height: 0.5rem; background-color: #222; border-radius: 4px; overflow: hidden; }
   .skill-bar-fill {
     height: 100%;
-    background-color: #2563eb;
+    background-color: #00ffff;
     width: 0%;
     border-radius: 4px;
-    transition: width 1s ease;
+    transition: width 1.2s ease;
   }
 
   /* Section spacing */
   section { padding: 6rem 2rem; }
+  h2 { margin-bottom: 3rem; text-align: center; color: #00ffff; }
 
-  /* Fade-in on scroll */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
-  }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Fade-in sections */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<nav class="fixed top-0 left-0 right-0 z-50">
   <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="font-bold text-xl">Portfólio</div>
+    <div class="font-bold text-xl">{"</>"}</div>
     <div class="space-x-6 hidden md:flex">
       <a href="#work">Projetos</a>
       <a href="#skills">Habilidades</a>
@@ -109,10 +101,10 @@
 </nav>
 
 <!-- Hero -->
-<section class="flex flex-col items-center justify-center text-center mt-20">
-  <h1 class="mb-4">DESIGNER & DEV FULL-STACK</h1>
-  <p class="text-lg mb-6 max-w-xl">Criação de interfaces e sistemas com foco em clareza tipográfica, funcionalidade e estética moderna.</p>
-  <div class="space-x-4">
+<section class="hero fade-in">
+  <h1>DESIGNER & DEV FULL-STACK</h1>
+  <p class="typewriter mt-4">Criação de interfaces e sistemas com precisão tipográfica e lógica de programação.</p>
+  <div class="mt-8 space-x-4">
     <a href="#work" class="btn">Ver Projetos</a>
     <a href="#contact" class="btn">Contato</a>
   </div>
@@ -120,23 +112,23 @@
 
 <!-- Work -->
 <section id="work" class="max-w-6xl mx-auto fade-in">
-  <h2 class="mb-12 text-center">Projetos Recentes</h2>
+  <h2>Projetos Recentes</h2>
   <div class="grid md:grid-cols-2 gap-8">
     <div class="card">
-      <h3>Sistema de Design</h3>
-      <p class="text-gray-600 mb-2">Diretrizes tipográficas e componentes UI.</p>
-      <div class="flex gap-2 flex-wrap text-sm">
-        <span class="bg-gray-100 px-2 py-1 rounded">Illustrator</span>
-        <span class="bg-gray-100 px-2 py-1 rounded">HTML/CSS</span>
-        <span class="bg-gray-100 px-2 py-1 rounded">JS</span>
+      <h3>SISTEMA_DE_DESIGN</h3>
+      <p class="text-gray-400 mb-2">Diretrizes tipográficas e componentes UI.</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <span class="bg-gray-800 px-2 py-1 rounded">Illustrator</span>
+        <span class="bg-gray-800 px-2 py-1 rounded">HTML/CSS</span>
+        <span class="bg-gray-800 px-2 py-1 rounded">JS</span>
       </div>
     </div>
     <div class="card">
-      <h3>Dashboard Analytics</h3>
-      <p class="text-gray-600 mb-2">Visualização de dados interativa.</p>
-      <div class="flex gap-2 flex-wrap text-sm">
-        <span class="bg-gray-100 px-2 py-1 rounded">Power BI</span>
-        <span class="bg-gray-100 px-2 py-1 rounded">Node.js</span>
+      <h3>DASHBOARD_ANALYTICS</h3>
+      <p class="text-gray-400 mb-2">Visualização de dados interativa.</p>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <span class="bg-gray-800 px-2 py-1 rounded">Power BI</span>
+        <span class="bg-gray-800 px-2 py-1 rounded">Node.js</span>
       </div>
     </div>
   </div>
@@ -144,47 +136,37 @@
 
 <!-- Skills -->
 <section id="skills" class="max-w-6xl mx-auto fade-in">
-  <h2 class="mb-12 text-center">Habilidades Técnicas</h2>
+  <h2>Habilidades Técnicas</h2>
   <div class="grid md:grid-cols-2 gap-8">
     <div>
       <h3 class="mb-2">Tecnologias</h3>
-      <div class="mb-4">
-        <div class="mb-1">Node.js</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
-      </div>
-      <div class="mb-4">
-        <div class="mb-1">JavaScript</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div>
-      </div>
+      <div class="mb-4"><div>Node.js</div><div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+      <div class="mb-4"><div>JavaScript</div><div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></div>
+      <div class="mb-4"><div>HTML/CSS</div><div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div></div>
     </div>
     <div>
       <h3 class="mb-2">Design</h3>
-      <div class="mb-4">
-        <div class="mb-1">Illustrator</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
-      </div>
-      <div class="mb-4">
-        <div class="mb-1">Power BI</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
-      </div>
+      <div class="mb-4"><div>Illustrator</div><div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></div>
+      <div class="mb-4"><div>Power BI</div><div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></div>
+      <div class="mb-4"><div>Tipografia</div><div class="skill-bar"><div class="skill-bar-fill" style="width:88%"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- About -->
 <section id="about" class="max-w-4xl mx-auto fade-in">
-  <h2 class="mb-12 text-center">Sobre Mim</h2>
-  <p class="text-center text-gray-700 mb-4">Designer e desenvolvedor full-stack focado em criar experiências digitais coerentes e funcionais. Combino princípios de design clássico com tecnologias modernas para soluções completas.</p>
-  <p class="text-center text-gray-700">Minha abordagem valoriza clareza tipográfica, funcionalidade e estética, criando interfaces que comunicam eficientemente.</p>
+  <h2>Sobre Mim</h2>
+  <p class="text-center text-gray-400 mb-4">Designer e desenvolvedor full-stack com foco em interfaces que unem estética e lógica de programação.</p>
+  <p class="text-center text-gray-400">Minha abordagem combina clareza tipográfica com técnicas de programação para criar experiências digitais sofisticadas e funcionais.</p>
 </section>
 
 <!-- Contact -->
 <section id="contact" class="max-w-4xl mx-auto fade-in">
-  <h2 class="mb-12 text-center">Contato</h2>
+  <h2>Contato</h2>
   <form class="grid gap-6">
-    <input type="text" placeholder="Nome" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"/>
-    <input type="email" placeholder="Email" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"/>
-    <textarea rows="4" placeholder="Mensagem" class="p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-600"></textarea>
+    <input type="text" placeholder="Nome" class="p-3 border border-gray-800 rounded focus:outline-none focus:border-cyan-300"/>
+    <input type="email" placeholder="Email" class="p-3 border border-gray-800 rounded focus:outline-none focus:border-cyan-300"/>
+    <textarea rows="4" placeholder="Mensagem" class="p-3 border border-gray-800 rounded focus:outline-none focus:border-cyan-300"></textarea>
     <button type="submit" class="btn w-full">Enviar Mensagem</button>
   </form>
 </section>
@@ -203,6 +185,20 @@
     });
   }, { threshold: 0.2 });
   fadeElems.forEach(el => observer.observe(el));
+
+  // Typewriter
+  const phrases = ["DESIGNER_DE_INTERFACES", "DESENVOLVEDOR_FULL-STACK", "TIPOGRAFIA_MODERNA", "EXPERIÊNCIAS_DIGITAIS"];
+  const typeEl = document.querySelector('.typewriter');
+  let i=0, j=0, current='', isDeleting=false;
+  function typeWriter() {
+    const full = phrases[i];
+    if(isDeleting){ current = full.substring(0,j--); } else { current = full.substring(0,j++); }
+    typeEl.textContent = current;
+    if(!isDeleting && j===full.length){ isDeleting=true; setTimeout(typeWriter,1500); }
+    else if(isDeleting && j===0){ isDeleting=false; i=(i+1)%phrases.length; setTimeout(typeWriter,500); }
+    else { setTimeout(typeWriter, isDeleting?50:100); }
+  }
+  setTimeout(typeWriter,1000);
 </script>
 </body>
 </html>
