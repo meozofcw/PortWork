@@ -1,386 +1,215 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfólio | Seu Nome</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio | Designer & Dev Full-Stack</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-            'fade-in': 'fadeIn 1.5s ease-in',
-            'slide-up': 'slideUp 1s ease-out',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-20px)' },
-            },
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(50px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            }
-          }
-        }
-      }
+
+  <style>
+    /* Fonte personalizada */
+    @font-face {
+      font-family: 'Zarma';
+      src: url('https://example.com/zarma-regular.woff2') format('woff2');
     }
-  </script>
+
+    body {
+      font-family: 'Zarma', monospace;
+      background: radial-gradient(circle at center, #0a0a0a, #000);
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* Cursor customizado */
+    body, a, button {
+      cursor: url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMTIiLz48L3N2Zz4='), auto;
+    }
+
+    /* Glitch */
+    .glitch {
+      position: relative;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .glitch::before { color: #0ff; animation: glitch 2s infinite; }
+    .glitch::after  { color: #f0f; animation: glitch 3s infinite reverse; }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Botão neon */
+    .neon-btn {
+      border: 1px solid #0ff;
+      position: relative;
+      transition: 0.3s;
+    }
+    .neon-btn::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,255,255,0.1);
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .neon-btn:hover {
+      box-shadow: 0 0 15px #0ff;
+    }
+    .neon-btn:hover::after {
+      opacity: 1;
+    }
+
+    /* Cards com efeito tilt */
+    .tilt:hover {
+      transform: perspective(800px) rotateY(5deg) rotateX(5deg);
+    }
+    .tilt {
+      transition: transform 0.3s ease;
+    }
+
+    /* Scroll animation */
+    .hidden-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .visible-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans scroll-smooth">
-  <!-- Cursor personalizado -->
-  <div class="cursor-dot fixed w-4 h-4 bg-indigo-500 rounded-full pointer-events-none transform -translate-x-1/2 -translate-y-1/2 z-50 mix-blend-difference" style="left: 0px; top: 0px;"></div>
-  
-  <!-- Botão de voltar ao topo -->
-  <button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 w-12 h-12 rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 shadow-lg hover:bg-indigo-700">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+<body>
+
+  <!-- Menu -->
+  <nav class="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex justify-between items-center bg-black/70 backdrop-blur-sm border-b border-cyan-300/20">
+    <div class="text-xl font-bold tracking-wider">{"</>"}</div>
+    <div class="hidden md:flex space-x-8">
+      <a href="#work" class="hover:text-cyan-300">PROJETOS</a>
+      <a href="#skills" class="hover:text-cyan-300">HABILIDADES</a>
+      <a href="#about" class="hover:text-cyan-300">SOBRE</a>
+      <a href="#contact" class="hover:text-cyan-300">CONTATO</a>
+    </div>
+    <button class="md:hidden text-xl">≡</button>
+  </nav>
 
   <!-- Hero -->
-  <section class="min-h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
-    <!-- Partículas de fundo -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="particle absolute rounded-full bg-indigo-500 opacity-20" style="width: 5px; height: 5px;"></div>
-      <div class="particle absolute rounded-full bg-indigo-500 opacity-20" style="width: 5px; height: 5px;"></div>
-      <div class="particle absolute rounded-full bg-indigo-500 opacity-20" style="width: 5px; height: 5px;"></div>
-      <div class="particle absolute rounded-full bg-indigo-500 opacity-20" style="width: 5px; height: 5px;"></div>
-      <div class="particle absolute rounded-full bg-indigo-500 opacity-20" style="width: 5px; height: 5px;"></div>
-    </div>
-    
-    <div class="relative z-10">
-      <h1 class="text-4xl md:text-6xl font-bold mb-4 animate__animated animate__fadeInDown">
-        Olá, eu sou <span class="text-indigo-500 animate-pulse">Seu Nome</span>
+  <section class="min-h-screen flex items-center px-8 pt-24 text-center md:text-left">
+    <div class="max-w-4xl mx-auto">
+      <span class="text-green-400">// PORTFÓLIO_INICIALIZANDO...</span>
+      <h1 class="text-5xl md:text-7xl font-bold my-6">
+        <span class="glitch" data-text="DESIGNER_DEV">DESIGNER_DEV</span>
       </h1>
-      <p class="text-xl md:text-2xl text-gray-300 mb-6 animate__animated animate__fadeIn animate__delay-1s">
-        Desenvolvedor Front-end | UI Designer | Freelancer Criativo
-      </p>
-      <div class="space-x-4 animate__animated animate__fadeInUp animate__delay-1s">
-        <a href="#projetos" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-indigo-500/30">
-          Ver Projetos
-        </a>
-        <a href="#contato" class="border border-indigo-500 px-6 py-3 rounded-xl hover:bg-indigo-800 transition-all duration-300 transform hover:scale-105">
-          Contato
-        </a>
-      </div>
-      
-      <!-- Ícone de scroll -->
-      <div class="mt-16 animate-float">
-        <a href="#projetos" class="inline-block">
-          <i class="fas fa-chevron-down text-2xl text-gray-400 animate-bounce"></i>
-        </a>
+      <p id="type-text" class="text-cyan-300 text-2xl font-mono mb-8"></p>
+      <div class="flex flex-wrap justify-center md:justify-start gap-4">
+        <a href="#work" class="neon-btn px-6 py-3">VER_PROJETOS</a>
+        <a href="#contact" class="neon-btn px-6 py-3">CONTATO_IMEDIATO</a>
       </div>
     </div>
   </section>
 
-  <!-- Projetos -->
-  <section id="projetos" class="px-8 py-16 bg-gray-800">
+  <!-- Work -->
+  <section id="work" class="py-24 px-8 hidden-section">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12 relative inline-block">
-        <span class="relative z-10">Meus Projetos</span>
-        <span class="absolute bottom-0 left-0 w-full h-2 bg-indigo-500/30 z-0 animate-pulse"></span>
-      </h2>
-      
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Projeto 1 -->
-        <div 
-          class="bg-gray-700 p-6 rounded-xl hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 group overflow-hidden relative"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div class="relative z-10">
-            <div class="w-full h-48 bg-gray-600 rounded-lg mb-4 overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
-                <i class="fas fa-code text-5xl text-white opacity-80"></i>
-              </div>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Projeto 1</h3>
-            <p class="text-gray-300 mb-4">Descrição breve do projeto com as tecnologias utilizadas.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">React</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Tailwind</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Node.js</span>
-            </div>
-            <a href="#" class="text-indigo-400 mt-2 inline-flex items-center group-hover:text-white transition-colors">
-              Ver detalhes <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-            </a>
-          </div>
+      <h2 class="text-4xl font-bold mb-12"><span class="text-outline">PROJETOS_</span><span class="text-cyan-300">RECENTES</span></h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="tilt border border-gray-800 p-6 bg-black hover:border-cyan-300">
+          <h3 class="text-2xl font-bold mb-2">SISTEMA_DE_DESIGN</h3>
+          <p class="text-gray-400">DIRETRIZES TIPOGRÁFICAS E COMPONENTES UI</p>
         </div>
-        
-        <!-- Projeto 2 -->
-        <div 
-          class="bg-gray-700 p-6 rounded-xl hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 group overflow-hidden relative"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div class="relative z-10">
-            <div class="w-full h-48 bg-gray-600 rounded-lg mb-4 overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-r from-blue-500 to-teal-400 flex items-center justify-center">
-                <i class="fas fa-mobile-screen text-5xl text-white opacity-80"></i>
-              </div>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Projeto 2</h3>
-            <p class="text-gray-300 mb-4">Descrição breve do projeto com as tecnologias utilizadas.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Vue.js</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">TypeScript</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Firebase</span>
-            </div>
-            <a href="#" class="text-indigo-400 mt-2 inline-flex items-center group-hover:text-white transition-colors">
-              Ver detalhes <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-            </a>
-          </div>
+        <div class="tilt border border-gray-800 p-6 bg-black hover:border-cyan-300">
+          <h3 class="text-2xl font-bold mb-2">DASHBOARD_ANALYTICS</h3>
+          <p class="text-gray-400">VISUALIZAÇÃO DE DADOS INTERATIVA</p>
         </div>
-        
-        <!-- Projeto 3 -->
-        <div 
-          class="bg-gray-700 p-6 rounded-xl hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 group overflow-hidden relative"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div class="relative z-10">
-            <div class="w-full h-48 bg-gray-600 rounded-lg mb-4 overflow-hidden">
-              <div class="w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                <i class="fas fa-paint-brush text-5xl text-white opacity-80"></i>
-              </div>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">Projeto 3</h3>
-            <p class="text-gray-300 mb-4">Descrição breve do projeto com as tecnologias utilizadas.</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">UI/UX</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Figma</span>
-              <span class="px-2 py-1 bg-gray-600 rounded-md text-xs">Web Design</span>
-            </div>
-            <a href="#" class="text-indigo-400 mt-2 inline-flex items-center group-hover:text-white transition-colors">
-              Ver detalhes <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="text-center mt-12" data-aos="fade-up">
-        <a href="#" class="inline-flex items-center px-6 py-3 border border-indigo-500 rounded-xl hover:bg-indigo-800 transition-all duration-300 group">
-          Ver todos os projetos
-          <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Habilidades -->
-  <section class="px-8 py-16 bg-gray-900">
+  <!-- Skills -->
+  <section id="skills" class="py-24 px-8 bg-gray-900 hidden-section">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">Minhas Habilidades</h2>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <!-- Habilidade 1 -->
-        <div class="bg-gray-800 p-6 rounded-xl text-center transition-all duration-300 hover:bg-indigo-900/30 hover:shadow-lg" data-aos="zoom-in">
-          <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fab fa-html5 text-2xl"></i>
-          </div>
-          <h3 class="font-semibold mb-2">HTML5</h3>
-          <div class="w-full bg-gray-700 rounded-full h-2">
-            <div class="bg-indigo-500 h-2 rounded-full" style="width: 95%"></div>
+      <h2 class="text-4xl font-bold mb-12"><span class="text-outline">HABILIDADES_</span><span class="text-cyan-300">TÉCNICAS</span></h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <p class="text-green-400 mb-4">$ TECNOLOGIAS</p>
+          <div class="space-y-4">
+            <div><span>NODE.JS</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:85%"></div></div></div>
+            <div><span>JAVASCRIPT</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:90%"></div></div></div>
           </div>
         </div>
-        
-        <!-- Habilidade 2 -->
-        <div class="bg-gray-800 p-6 rounded-xl text-center transition-all duration-300 hover:bg-indigo-900/30 hover:shadow-lg" data-aos="zoom-in" data-aos-delay="100">
-          <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fab fa-css3-alt text-2xl"></i>
-          </div>
-          <h3 class="font-semibold mb-2">CSS3</h3>
-          <div class="w-full bg-gray-700 rounded-full h-2">
-            <div class="bg-indigo-500 h-2 rounded-full" style="width: 90%"></div>
-          </div>
-        </div>
-        
-        <!-- Habilidade 3 -->
-        <div class="bg-gray-800 p-6 rounded-xl text-center transition-all duration-300 hover:bg-indigo-900/30 hover:shadow-lg" data-aos="zoom-in" data-aos-delay="200">
-          <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fab fa-js text-2xl"></i>
-          </div>
-          <h3 class="font-semibold mb-2">JavaScript</h3>
-          <div class="w-full bg-gray-700 rounded-full h-2">
-            <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%"></div>
-          </div>
-        </div>
-        
-        <!-- Habilidade 4 -->
-        <div class="bg-gray-800 p-6 rounded-xl text-center transition-all duration-300 hover:bg-indigo-900/30 hover:shadow-lg" data-aos="zoom-in" data-aos-delay="300">
-          <div class="w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fab fa-react text-2xl"></i>
-          </div>
-          <h3 class="font-semibold mb-2">React</h3>
-          <div class="w-full bg-gray-700 rounded-full h-2">
-            <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%"></div>
+        <div>
+          <p class="text-green-400 mb-4">$ DESIGN</p>
+          <div class="space-y-4">
+            <div><span>ILLUSTRATOR</span><div class="w-full bg-gray-800 h-2"><div class="bg-cyan-300 h-2" style="width:80%"></div></div></div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="about" class="py-24 px-8 hidden-section">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6"><span class="text-outline">SOBRE_</span><span class="text-cyan-300">MIM</span></h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">Designer e desenvolvedor full-stack focado em criar experiências digitais imersivas...</p>
     </div>
   </section>
 
   <!-- Contato -->
-  <section id="contato" class="px-8 py-16 bg-gray-800">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-8" data-aos="fade-up">Fale comigo</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div data-aos="fade-right">
-          <h3 class="text-xl font-semibold mb-4">Informações de Contato</h3>
-          <div class="space-y-4">
-            <div class="flex items-center">
-              <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center mr-4">
-                <i class="fas fa-envelope"></i>
-              </div>
-              <span>seuemail@exemplo.com</span>
-            </div>
-            <div class="flex items-center">
-              <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center mr-4">
-                <i class="fas fa-phone"></i>
-              </div>
-              <span>+55 (00) 00000-0000</span>
-            </div>
-            <div class="flex items-center">
-              <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center mr-4">
-                <i class="fas fa-map-marker-alt"></i>
-              </div>
-              <span>Sua Cidade, Brasil</span>
-            </div>
-          </div>
-          
-          <div class="mt-8">
-            <h3 class="text-xl font-semibold mb-4">Redes Sociais</h3>
-            <div class="flex space-x-4">
-              <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-indigo-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-indigo-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-indigo-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-indigo-500 rounded-full flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <form class="space-y-4" data-aos="fade-left">
-          <input 
-            type="text" 
-            placeholder="Seu nome" 
-            class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-          >
-          <input 
-            type="email" 
-            placeholder="Seu email" 
-            class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-          >
-          <textarea 
-            placeholder="Sua mensagem" 
-            rows="5" 
-            class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
-          ></textarea>
-          <button 
-            type="submit" 
-            class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
-          >
-            Enviar Mensagem
-          </button>
-        </form>
-      </div>
+  <section id="contact" class="py-24 px-8 bg-black hidden-section">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6"><span class="text-outline">CONTATO_</span><span class="text-cyan-300">DIRETO</span></h2>
+      <form class="space-y-4 max-w-lg mx-auto">
+        <input type="text" placeholder="Nome" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"/>
+        <input type="email" placeholder="Email" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"/>
+        <textarea rows="4" placeholder="Mensagem" class="w-full bg-black border-b border-gray-700 py-3 px-2 focus:border-cyan-300 outline-none"></textarea>
+        <button type="submit" class="neon-btn px-8 py-3">ENVIAR</button>
+      </form>
     </div>
   </section>
 
-  <!-- Rodapé -->
-  <footer class="text-center py-8 bg-gray-900 text-gray-400">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="mb-6">
-        <a href="#" class="text-2xl font-bold text-white">
-          <span class="text-indigo-500">{"</>"}</span> SeuNome
-        </a>
-      </div>
-      <div class="flex justify-center space-x-6 mb-6">
-        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-      <p class="text-sm">© 2025 Seu Nome. Todos os direitos reservados.</p>
-    </div>
+  <!-- Footer -->
+  <footer class="py-6 px-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+    © 2025 DESIGNER_DEV. Criado com HTML, CSS e JS.
   </footer>
 
   <script>
-    // Inicializa AOS (Animate On Scroll)
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true
-    });
-    
-    // Cursor personalizado
-    const cursorDot = document.querySelector('.cursor-dot');
-    document.addEventListener('mousemove', (e) => {
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorDot.style.top = `${e.clientY}px`;
-    });
-    
-    // Botão de voltar ao topo
-    const backToTopButton = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.remove('opacity-0', 'invisible');
-        backToTopButton.classList.add('opacity-100', 'visible');
-      } else {
-        backToTopButton.classList.remove('opacity-100', 'visible');
-        backToTopButton.classList.add('opacity-0', 'invisible');
+    // Efeito de digitação
+    const phrases = ["DESIGNER_DE_INTERFACES", "DESENVOLVEDOR_FULL-STACK", "ESPECIALISTA_EM_TIPOGRAFIA"];
+    let i = 0, j = 0, currentPhrase = [], isDeleting = false;
+    const el = document.getElementById("type-text");
+
+    function loop() {
+      el.textContent = currentPhrase.join("");
+      if (i < phrases.length) {
+        if (!isDeleting && j <= phrases[i].length) currentPhrase.push(phrases[i][j++]);
+        if (isDeleting && j > 0) currentPhrase.pop(j--);
+        if (j === phrases[i].length) isDeleting = true;
+        if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % phrases.length; }
       }
-    });
-    
-    backToTopButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Efeito de partículas
-    const particlesContainer = document.querySelector('.absolute.inset-0.overflow-hidden');
-    for (let i = 0; i < 20; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.top = `${Math.random() * 100}%`;
-      particle.style.width = `${Math.random() * 5 + 2}px`;
-      particle.style.height = particle.style.width;
-      particle.style.opacity = Math.random() * 0.3 + 0.1;
-      particle.style.animation = `float ${Math.random() * 10 + 5}s ease-in-out infinite ${Math.random() * 5}s`;
-      particlesContainer.appendChild(particle);
+      setTimeout(loop, isDeleting ? 50 : 100);
     }
+    loop();
+
+    // Scroll animation
+    const sections = document.querySelectorAll(".hidden-section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible-section");
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
